@@ -1,0 +1,57 @@
+{
+  "name": "Spec",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "category code id",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "CategoryStatus",
+      "javadoc": "name",
+      "fieldValues": "Active,Inactive"
+    },
+    {
+      "fieldName": "parentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "CategoryGrade",
+      "fieldValues": "A (All),B (Anaylist),C (Public)"
+    },
+    {
+      "fieldName": "createDt",
+      "fieldType": "LocalDate",
+      "javadoc": "grade"
+    },
+    {
+      "fieldName": "modifyDt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "tb_mkt_spec",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": [
+    "Mkt_Back"
+  ]
+}
