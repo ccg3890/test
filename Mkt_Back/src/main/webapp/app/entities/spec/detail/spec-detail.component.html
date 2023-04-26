@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="spec">
+      <h2 data-cy="specDetailsHeading"><span jhiTranslate="mktBackApp.spec.detail.title">Spec</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="mktBackApp.spec.id">Id</span></dt>
+        <dd>
+          <span>{{ spec.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.name" [ngbTooltip]="'mktBackApp.spec.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ spec.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.status" [ngbTooltip]="'mktBackApp.spec.help.status' | translate">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'mktBackApp.CategoryStatus.' + spec.status }}">{{ spec.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.parentId">Parent Id</span></dt>
+        <dd>
+          <span>{{ spec.parentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.grade">Grade</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'mktBackApp.CategoryGrade.' + spec.grade }}">{{ spec.grade }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.createDt" [ngbTooltip]="'mktBackApp.spec.help.createDt' | translate">Create Dt</span></dt>
+        <dd>
+          <span>{{ spec.createDt | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.spec.modifyDt">Modify Dt</span></dt>
+        <dd>
+          <span>{{ spec.modifyDt | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/spec', spec.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

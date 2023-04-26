@@ -1,0 +1,9 @@
+{
+  "mktBackApp": {
+    "CategoryStatus": {
+      "null": "",
+      "Active": "Active",
+      "Inactive": "Inactive"
+    }
+  }
+}

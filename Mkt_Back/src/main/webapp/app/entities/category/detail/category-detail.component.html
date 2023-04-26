@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading"><span jhiTranslate="mktBackApp.category.detail.title">Category</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="mktBackApp.category.id">Id</span></dt>
+        <dd>
+          <span>{{ category.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.name" [ngbTooltip]="'mktBackApp.category.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ category.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.status" [ngbTooltip]="'mktBackApp.category.help.status' | translate">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'mktBackApp.CategoryStatus.' + category.status }}">{{ category.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.parentId">Parent Id</span></dt>
+        <dd>
+          <span>{{ category.parentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.grade">Grade</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'mktBackApp.CategoryGrade.' + category.grade }}">{{ category.grade }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="mktBackApp.category.createUser" [ngbTooltip]="'mktBackApp.category.help.createUser' | translate"
+            >Create User</span
+          >
+        </dt>
+        <dd>
+          <span>{{ category.createUser }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.modifyUser">Modify User</span></dt>
+        <dd>
+          <span>{{ category.modifyUser }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.createDt">Create Dt</span></dt>
+        <dd>
+          <span>{{ category.createDt | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.modifyDt">Modify Dt</span></dt>
+        <dd>
+          <span>{{ category.modifyDt | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="mktBackApp.category.user">User</span></dt>
+        <dd>
+          <span>{{ category.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

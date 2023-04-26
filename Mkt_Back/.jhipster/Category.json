@@ -1,0 +1,68 @@
+{
+  "applications": ["Mkt_Back"],
+  "changelogDate": "20230426064512",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_mkt_category",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200",
+      "javadoc": "category code id"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "CategoryStatus",
+      "fieldValues": "Active,Inactive",
+      "javadoc": "name"
+    },
+    {
+      "fieldName": "parentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "grade",
+      "fieldType": "CategoryGrade",
+      "fieldValues": "A (All),B (Anaylist),C (Public)"
+    },
+    {
+      "fieldName": "createUser",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "grade"
+    },
+    {
+      "fieldName": "modifyUser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDt",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modifyDt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Category",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
