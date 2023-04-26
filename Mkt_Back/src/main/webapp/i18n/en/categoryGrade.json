@@ -1,0 +1,10 @@
+{
+  "mktBackApp": {
+    "CategoryGrade": {
+      "null": "",
+      "A": "All",
+      "B": "Anaylist",
+      "C": "Public"
+    }
+  }
+}
