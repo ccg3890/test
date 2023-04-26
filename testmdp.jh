@@ -3,7 +3,6 @@ application {
   config {
     baseName Mkt_Back_Gate_Way,
     applicationType gateway,
-    packageName com.myapp,
     authenticationType jwt,
     prodDatabaseType postgresql,
     clientFramework vue,
@@ -11,7 +10,6 @@ application {
     buildTool gradle,
     dtoSuffix DTO,
     enableSwaggerCodegen true,
-    entitySuffix Entity,
     packageName com.mktback.gateway
   }
   entities User
@@ -21,17 +19,15 @@ application {
   config {
     baseName Mkt_Back,
     applicationType monolith,
-    packageName com.myapp,
     authenticationType jwt,
     prodDatabaseType postgresql,
     buildTool gradle,
     serverPort 8081,
     dtoSuffix DTO,
     enableSwaggerCodegen true,
-    entitySuffix Entity,
     packageName com.mktback.application
   }
-  entities Category, Data, User
+  entities Category, User, Spec
 }
 
 enum CategoryGrade {
@@ -51,41 +47,37 @@ enum UserStatus {
 }
 
 entity User(tb_mkt_user){
-	id String required, /** category code id */
-    name String maxlength(200), /** name */
-    status UserStatus,
-    createDt LocalDate,
-    modifyDt LocalDate,
+  id String required, /** category code id */
+  name String maxlength(200), /** name */
+  status UserStatus,
+  createDt LocalDate,
+  modifyDt LocalDate,
 }
 
 entity Category(tb_mkt_category){
-	id String required, /** category code id */
-    name String maxlength(200), /** name */
-    status CategoryStatus,
-    parentId String,
-    grade CategoryGrade, /** grade */
-    createUser String required,
-    modifyUser String,
-    createDt LocalDate required,
-    modifyDt LocalDate,
+  id String required, /** category code id */
+  name String maxlength(200), /** name */
+  status CategoryStatus,
+  parentId String,
+  grade CategoryGrade, /** grade */
+  createUser String required,
+  modifyUser String,
+  createDt LocalDate required,
+  modifyDt LocalDate,
 }
 
 entity Spec(tb_mkt_spec) {
-	id String required, /** category code id */
-    name String maxlength(200), /** name */
-    status CategoryStatus,
-    parentId String,
-    grade CategoryGrade, /** grade */
-    createDt LocalDate,
-    modifyDt LocalDate,
+  id String required, /** category code id */
+  name String maxlength(200), /** name */
+  status CategoryStatus,
+  parentId String,
+  grade CategoryGrade, /** grade */
+  createDt LocalDate,
+  modifyDt LocalDate,
 }
 
-entity C {}
-
-entity D {}
-
-relationship OneToMany {
-  Category to User
+relationship ManyToOne {
+  Category{user} to User
 }
 
 dto * with mapstruct
