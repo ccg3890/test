@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="CategoryHeading">
+    <span jhiTranslate="mktBackApp.category.home.title">Categories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="mktBackApp.category.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-category"
+        [routerLink]="['/category/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="mktBackApp.category.home.createLabel"> Create a new Category </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="categories?.length === 0">
+    <span jhiTranslate="mktBackApp.category.home.notFound">No Categories found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="categories && categories.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="parentId">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.parentId">Parent Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="grade">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.grade">Grade</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createUser">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.createUser">Create User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="modifyUser">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.modifyUser">Modify User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createDt">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.createDt">Create Dt</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="modifyDt">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.modifyDt">Modify Dt</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <div class="d-flex">
+              <span jhiTranslate="mktBackApp.category.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let category of categories; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
+          </td>
+          <td>{{ category.name }}</td>
+          <td jhiTranslate="{{ 'mktBackApp.CategoryStatus.' + category.status }}">{{ category.status }}</td>
+          <td>{{ category.parentId }}</td>
+          <td jhiTranslate="{{ 'mktBackApp.CategoryGrade.' + category.grade }}">{{ category.grade }}</td>
+          <td>{{ category.createUser }}</td>
+          <td>{{ category.modifyUser }}</td>
+          <td>{{ category.createDt | formatMediumDate }}</td>
+          <td>{{ category.modifyDt | formatMediumDate }}</td>
+          <td>
+            {{ category.user?.id }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/category', category.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/category', category.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(category)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
