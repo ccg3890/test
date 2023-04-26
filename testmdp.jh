@@ -1,0 +1,90 @@
+
+application {
+  config {
+    baseName Mkt_Back_Gate_Way,
+    applicationType gateway,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    clientFramework vue,
+    serverPort 8080,
+    buildTool gradle,
+    dtoSuffix DTO,
+    enableSwaggerCodegen true,
+    entitySuffix Entity,
+    packageName com.mktback.gateway
+  }
+  entities User
+}
+
+application {
+  config {
+    baseName Mkt_Back,
+    applicationType monolith,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    buildTool gradle,
+    serverPort 8081,
+    dtoSuffix DTO,
+    enableSwaggerCodegen true,
+    entitySuffix Entity,
+    packageName com.mktback.application
+  }
+  entities Category, Data, User, Spec
+}
+
+enum CategoryGrade {
+  A(All),
+  B(Anaylist),
+  C(Public)
+}
+
+enum CategoryStatus {
+  Active,
+  Inactive
+}
+
+enum UserStatus {
+  Active,
+  Inactive
+}
+
+entity User(tb_mkt_user){
+	id String required, /** category code id */
+    name String maxlength(200), /** name */
+    status UserStatus,
+    createDt LocalDate,
+    modifyDt LocalDate,
+}
+
+entity Category(tb_mkt_category){
+	id String required, /** category code id */
+    name String maxlength(200), /** name */
+    status CategoryStatus,
+    parentId String,
+    grade CategoryGrade, /** grade */
+    createUser String required,
+    modifyUser String,
+    createDt LocalDate required,
+    modifyDt LocalDate,
+}
+
+entity Spec(tb_mkt_spec) {
+	id String required, /** category code id */
+    name String maxlength(200), /** name */
+    status CategoryStatus,
+    parentId String,
+    grade CategoryGrade, /** grade */
+    createDt LocalDate,
+    modifyDt LocalDate,
+}
+
+relationship OneToMany {
+  Category to User
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with infinite-scroll
+    
