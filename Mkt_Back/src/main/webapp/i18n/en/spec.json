@@ -1,0 +1,34 @@
+{
+  "mktBackApp": {
+    "spec": {
+      "home": {
+        "title": "Specs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Spec",
+        "createOrEditLabel": "Create or edit a Spec",
+        "notFound": "No Specs found"
+      },
+      "created": "A new Spec is created with identifier {{ param }}",
+      "updated": "A Spec is updated with identifier {{ param }}",
+      "deleted": "A Spec is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Spec {{ id }}?"
+      },
+      "detail": {
+        "title": "Spec"
+      },
+      "id": "Id",
+      "name": "Name",
+      "status": "Status",
+      "parentId": "Parent Id",
+      "grade": "Grade",
+      "createDt": "Create Dt",
+      "modifyDt": "Modify Dt",
+      "help": {
+        "name": "category code id",
+        "status": "name",
+        "createDt": "grade"
+      }
+    }
+  }
+}
